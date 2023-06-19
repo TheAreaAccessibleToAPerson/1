@@ -35,7 +35,7 @@ namespace Gudron.rabbitMQ.consumer
             var queueName = _channel.QueueDeclare().QueueName;
 
             // Свяжим нашу очередь с обмеником.
-            _channel.QueueBind(queue: Field.QueueName,
+            _channel.QueueBind(queue: queueName,
                                     exchange: Field.Exchange,
                                     routingKey: Field.RoutingKey);
 
@@ -45,7 +45,7 @@ namespace Gudron.rabbitMQ.consumer
             _consumer.Received += Received;
 
             // Свяжим с очередью.
-            _channel.BasicConsume(queue: Field.QueueName,
+            _channel.BasicConsume(queue: queueName,
                                  autoAck: Field.IsAutoAck, 
                                  consumer: _consumer);
         }

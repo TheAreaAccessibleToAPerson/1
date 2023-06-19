@@ -6,7 +6,7 @@ using RabbitMQ.Client.Events;
 /// </summary>
 namespace Gudron.rabbitMQ.consumer
 {
-    public class Default : Controller.Output<string>
+    public class Default : Controller.Output<string>.LocalField<ConsumerSettings>
     {
         private IConnection _connection;
         private IModel _channel;

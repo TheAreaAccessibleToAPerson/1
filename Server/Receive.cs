@@ -2,9 +2,11 @@ namespace Gudron
 {
     public sealed class Receive : ReceiveConnectionToSystem
     {
-        WebApplication _webApp;
+        void Construction() => ConnectionToSystem();
 
         void Start() => _webApp.Run();
+
+        WebApplication _webApp;
 
         void Configurate()
         {
@@ -13,7 +15,10 @@ namespace Gudron
 
             _webApp.Map("/", new MainPage("Server/html/index.html").Process);
 
-            _webApp.MapGet("/api/users", new API_Get_Users(InputToDBGetUsers, 50, "Person").Process);
+            _webApp.MapGet("/api/users", async (context) => 
+            {
+                await new API_Get_Users(InputToDB, 2050).Process(context);
+            });
         }
 
         void Stop()
@@ -25,20 +30,20 @@ namespace Gudron
         }
     }
 
-    public class Person
+    public class Users
     {
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
         public int Age { get; set; }
     }
 
-    public class API_Get_Users : RequestDB<List<Person>>
+    public class API_Get_Users : RequestDB
     {
-        private readonly IInput<RequestDB<List<Person>>> _inputToDB;
+        private readonly IInput<RequestDB> _inputToDB;
         private readonly int _timeDelay;
 
-        public API_Get_Users(IInput<RequestDB<List<Person>>> inputToDB, int timeDelay, string tableName)
-            : base(RequestType.Select)
+        public API_Get_Users(IInput<RequestDB> inputToDB, int timeDelay)
+            : base("SELECT * FROM Users")
         {
             _inputToDB = inputToDB;
             _timeDelay = timeDelay;
@@ -73,25 +78,17 @@ namespace Gudron
     {
     }
 
-    public class RequestDB<T>
+    public class RequestDB
     {
-        public enum RequestType
-        {
-            None = 0,
-            Select = 1,
-        }
-
-        public readonly RequestType Type;
-
         public string Response { set; get; } 
 
         public bool IsResponse { get { return !(Response is null);  } }
 
         public readonly string Request;
 
-        public RequestDB(RequestType type)
+        public RequestDB(string request)
         {
-            Type = type;
+            Request = request;
         }
     }
 

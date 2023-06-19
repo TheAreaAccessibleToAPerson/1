@@ -1,3 +1,5 @@
+using System.Runtime.ExceptionServices;
+using System;
 using System.Collections.Concurrent;
 
 namespace Gudron
@@ -15,48 +17,57 @@ namespace Gudron
     {
         void Construction()
         {
-            obj<rabbitMQ.consumer.Direct, string>("RabbitMQ.Consumer.Direct",
+            obj<rabbitMQ.consumer.Default, string>("RabbitMQ.Consumer.Default",
                 new rabbitMQ.ConsumerSettings
                 {
+                    QueueName = "dev_queue",
+                    RoutingKey = "dev_queue"
                 })
-                .output_to(obj<PersonManager>("ClientManager").Add);
+                .output_to((message) => 
+                {
+                    Console("HELLO");
+                });
 
-            obj<PersonManager, string>("ClientManager")
-                .output_to(obj<rabbitMQ.publisher.Direct>("RabbitMQ.Publisher.Direct",
+/*
+            obj<DBManager, string>("ClientManager")
+                .output_to(obj<rabbitMQ.publisher.Default>("RabbitMQ.Publisher.Direct",
                     new rabbitMQ.PublisherSettings
                     {
                     })
                     .Send);
+                    */
         }
     }
 
     public sealed class MainServer : Controller
     {
-        BlockingCollection<RequestDB<Person>> _requestsDB = new BlockingCollection<RequestDB<Person>>();
-        IInput<RequestDB<Person>> _inputToDB;
+        BlockingCollection<RequestDB> _requestsDB = new BlockingCollection<RequestDB>();
+        IInput<RequestDB> _inputToDB;
 
         void Construction()
         {
-            listen_message<RequestDB<Person>>("RequestDB")
+            listen_message<RequestDB>("RequestDB")
                 .output_to(_requestsDB.Add);
-            /*
-            input_to<RequestDB, int> 
-                (ref inputToClientManager, obj<ClientManager>("ClientManager").Add);
 
-            obj<ClientManager, string>("ClientManager")
-                .output_to(obj<rabbitMQ.publisher.Direct>("RabbitMQ.Publisher.Direct",
+            input_to<RequestDB> 
+                (ref _inputToDB, obj<DBManager>("DBManager").Add);
+
+            obj<DBManager, string>("DBManager")
+                .output_to(obj<rabbitMQ.publisher.Default>("RabbitMQ.Publisher.Default",
                     new rabbitMQ.PublisherSettings
                     {
-
+                        HostName = "LocalHost",
+                        RoutingKey = "dev-queue1",
                     })
                     .Send);
 
+            /*
             obj<rabbitMQ.consumer.Direct, string>("RabbitMQ.Consumer.Direct",
                 new rabbitMQ.ConsumerSettings
                 {
 
                 })
-                .output_to(obj<ClientManager>("ClientManager").Add);
+                .output_to(obj<DBManager>("DBManager").Add);
                 */
         }
 

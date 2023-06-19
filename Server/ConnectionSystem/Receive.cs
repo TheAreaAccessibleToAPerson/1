@@ -2,11 +2,11 @@ namespace Gudron
 {
     public class ReceiveConnectionToSystem : Controller.LocalField<Receive.Settings>
     {
-        protected IInput<RequestDB<List<Person>>> InputToDBGetUsers;
+        protected IInput<RequestDB> InputToDB;
 
-        void Construction()
+        protected void ConnectionToSystem()
         {
-            send_message<RequestDB<List<Person>>>(ref InputToDBGetUsers, "DB");
+            send_message<RequestDB>(ref InputToDB, "RequestDB");
         }
     }
 }

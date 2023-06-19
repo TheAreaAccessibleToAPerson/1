@@ -34,6 +34,7 @@ namespace Gudron.rabbitMQ.publisher
 
         public void Send(string message)
         {
+            Console("SEND");
             // Публикуем сообщение в очередь.
             _channel.BasicPublish(exchange: "",// Если пустая строка, то будет отправлятся в Default.
                                 routingKey: Field.RoutingKey,
