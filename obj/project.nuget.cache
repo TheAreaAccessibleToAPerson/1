@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "gSod48P2sY1QODKz/suhrm1ZjZaFUKGteEmf+zRQQzbvkN7MJUIy/VqgWpaBlOToiixMTb1UETwKugZXPmDMvg==",
+  "success": true,
+  "projectFilePath": "/home/dmitry/Документы/gudron/gudron.csproj",
+  "expectedPackageFiles": [
+    "/home/dmitry/.nuget/packages/litedb/5.0.16/litedb.5.0.16.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.7/microsoft.aspnetcore.authentication.jwtbearer.7.0.7.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.15.1/microsoft.identitymodel.jsonwebtokens.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.identitymodel.logging/6.15.1/microsoft.identitymodel.logging.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.identitymodel.protocols/6.15.1/microsoft.identitymodel.protocols.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.15.1/microsoft.identitymodel.protocols.openidconnect.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/microsoft.identitymodel.tokens/6.15.1/microsoft.identitymodel.tokens.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/rabbitmq.client/6.5.0/rabbitmq.client.6.5.0.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/system.identitymodel.tokens.jwt/6.15.1/system.identitymodel.tokens.jwt.6.15.1.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512",
+    "/home/dmitry/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

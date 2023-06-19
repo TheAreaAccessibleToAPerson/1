@@ -1,0 +1,17 @@
+body {
+    background-color: #025167;
+}
+
+.container {
+    width: 100%;
+}
+
+.block {
+    background-color: #39AECF;
+    margin: auto;
+
+    margin-top: 5%;
+
+    width: 30%;
+    height: 300px;
+}
